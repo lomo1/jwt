@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JWT</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <h3 class="text-center">Json Web Token</h3>
+    </header>
+
+    <hr>
+
+    <section>
+
+        <div class="row">
+            <div class="container container-fluid">
+                <div class="row form-inline">
+                    <div class="col-md-3">
+                        <input type="text" name="jstContents" id="" placeholder="jwt的内容">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="jstKeys" id="" placeholder="jwt的key">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default" id="setToken">提交</button>
+                    </div>
+                </div>
+                <p>JWT后的Token：</p>
+                <p class="jdtToken"></p>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="container container-fluid">
+                <div class="row form-inline">
+                    <div class="col-md-3">
+                        <input type="text" name="jstToken" id="" placeholder="输入解析的Token,如果有，无则解析Cookie中已有的">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="secretKey" id="" placeholder="输入解析的secret key" required>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-default" id="getContents">提交</button>
+                    </div>
+                </div>
+                <p>解析后的值: </p>
+                <p class="jwtValue"></p>
+            </div>
+        </div>
+
+    </section>
+</body>
+<script>
+    $().ready(function() {
+        $("#setToken").click(function() {
+            var jstToken = $("input[name='jstContents']").val();
+            var secretKey = $("input[name='jstKeys']").val();
+
+            if (jstToken !== undefined && secretKey !== undefined) {
+                $.ajax({
+                    url: '/jwt/set',
+                    data: {
+                        jstContents: jstToken,
+                        jstKeys: secretKey
+                    },
+                    method: 'POST',
+                    async: 'TRUE',
+                    error: function() {
+                        console.log("Internal error");
+                    },
+                    success: function(result) {
+                        //var res = JSON.parse(result);
+                        $("p.jdtToken").text(result);
+
+                    }
+                });
+            }
+        });
+
+        $("#getContents").click(function() {
+            //var jstToken = $("input[name='jstToken']").val();
+            var secretKey = $("input[name='secretKey']").val();
+
+            if (secretKey !== undefined) {
+                $.ajax({
+                    url: '/jwt/get',
+                    data: {
+                        secretKey: secretKey
+                    },
+                    method: 'POST',
+                    async: 'TRUE',
+                    error: function() {
+                        console.log("Internal error");
+                    },
+                    success: function(result) {
+                        console.log(result); //string
+                        //alert(typeof result);
+                        var res = JSON.parse(result);
+
+                        $("p.jwtValue").text(result);
+                        alert(JSON.stringify(res.contents));
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</html>
