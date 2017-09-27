@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Set Cookies</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <h2 class="text-center">Cookie</h2>
+
+    <div class="row col-md-8">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <th>one</th>
+                <th>tow</th>
+                <th>thee</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2</td>
+                    <td>23</td>
+                    <td>2123</td>
+                </tr>
+                <tr>
+                    <td>2222</td>
+                    <td>223</td>
+                    <td>2123</td>
+                </tr>
+                <tr>
+                    <td>2222!</td>
+                    <td>2d3</td>
+                    <td>2dd123</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="m-t-0"></p>
+
+    <div class="row col-md-10">
+        <form action="/cookies/set" role="form" class="from form-group" method="post">
+            <div class="form-inline">
+                <div class="col-md-5">
+                    <label>Key:</label>
+                    <input type="text" name="cookieKey" id="" placeholder="cookie key">
+                </div>
+                <div class="col-md-5">
+                    <label>Value:</label>
+                    <input type="text" name="cookieValue" id="" placeholder="cookie value">
+                </div>
+
+                <div class="col-md-2">
+                    <input type="submit" value="Submit" class="btn btn-default">
+                </div>
+
+
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
